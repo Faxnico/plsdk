@@ -1,0 +1,168 @@
+/** \mainpage PLSDK - General Introduction
+
+  \section arch_sec Architecture
+
+  The following diagram shows how the different PLSDK components are put
+  together:
+
+  <div style="float:left; margin: 0 18px 12px 0;">
+  \image html plsdk-diagram.png "PLSDK top-level diagram"
+  \image latex plsdk-diagram.png "PLSDK top-level diagram"
+  </div>
+
+  The Plastic Logic Software Development Kit (PLSDK) is a collection of
+  libraries and applications specialised in <span
+  style="font-weight:bold">electrophoretic displays (EPD)</span>, also known as
+  <span style="font-weight:bold">E-Paper</span>.  It is designed to easily
+  evaluate the Plastic Logic EPD technology, build demonstrators and product
+  prototypes.  It may also be used in a commercial product.
+
+  The <span style="font-weight:bold">C API</span> provided by the PLSDK
+  libraries provides an abstraction layer as well as convenience functions to
+  achieve all basic <span style="font-weight:bold">drawing operations</span>
+  and complete <span style="font-weight:bold">manual EPD control</span>.  The
+  code is platform-independent, but currently relies on the standard Linux
+  kernel framebuffer and input device driver interfaces.  It is known to work
+  on most <span style="font-weight:bold">GNU/Linux</span> distributions
+  (Debian, Ubuntu, Ångström) on <span style="font-weight:bold">ARM and
+  x86</span>, as well as <span style="font-weight:bold">Android</span>.
+
+  Note: <span style="font-weight:bold">A Python <code>plsdk</code>
+  package</span> based on the PLSDK libraries is also available and provides a
+  quicker and more flexible prototyping framework.  Only the interfaces to the
+  C PLSDK libraries are documented here; please refer to the Python
+  <code>plsdk</code> specific documentation for more information on the
+  subject.
+
+  <div style="clear:both">&nbsp;</div>
+
+  \section lib_sec Libraries
+
+  This documentation contentrates on the API provided by the following C
+  libraries:
+
+  - <code style="font-weight:bold">libplepaper</code>:
+    E-Paper abstract interface\n
+    \n
+    This library internally uses run-time loadable modules named
+    <code>mod_plepaper_NAME.so</code> where NAME is replaced by the module
+    name.  For example, on the Plastic Logic Didplay Evaluation Kit (PLDEK),
+    the <code>imx</code> module is used and resides in the
+    <code>mod_plepaper_imx.so</code> file.  Each module contains an
+    implementation of the abstract library E-Paper API back-end for a specific
+    E-Paper Display Controler (ePDC).\n
+    \n
+    Note: There is currently no standard Linux driver interface so each
+    implementation is different.  The <code>plep</code> module uses a draft
+    standard Linux kernel E-Paper API written by Plastic Logic, available on a
+    few platforms.
+
+  - <code style="font-weight:bold">libpldraw</code>:
+    Framebuffer graphics library\n
+    \n
+    Since most graphical user interface (GUI) environment do not support
+    E-Paper, this library provides basic graphical functionality at the frame
+    buffer level.  It does not depend on any third-party libraries, it only
+    requires a standard Linux frame buffer device.\n
+    \n
+    Typical graphical operations include filling rectangles with a given
+    colour, drawing lines, setting pixels (typically useful when drawing
+    images) and writing strings of text.\n
+    \n
+    <span style="font-weight:bold">Colour Plastic Logic E-Paper displays</span>
+    use a colour filter array (CFA) with red, green, blue and white sub-pixel
+    filters.  The <code>libpldraw</code> library provides an option to
+    automatically perform this conversion.  Please note that the apparent
+    display resolution is then divided by 4 and that colour identifiers are
+    specific to each CFA mode.\n
+
+  - <code style="font-weight:bold">libplinput</code>:
+    Input device library\n
+    \n
+    This convenience library allows basic interaction with a user via the
+    standard Linux input event device interface.  It is not related to any EPD
+    technology in particular, but is mostly useful in the absence of any
+    high-level GUI framework.\n
+    \n
+    Input devices such as touchscreens, mice, keyboards and buttons can be used
+    to make varions demo applications featuring handwriting (see
+    <code>plottest</code>), text typing and menu controls.\n
+
+  \section apps_sec Command line applications
+
+  The following command-line applications are included in the PLSDK:
+
+  - <code style="font-weight:bold">eptest</code>:
+    E-Paper test application\n
+    \n
+    Most aspects of the Plastic Logic EPD technology can be evaluated via this
+    application.  It contains several test patterns and sequences, most of them
+    with additional options to let the user eplore further and understand the
+    intricacies of EPDs.  Here are a few examples:\n
+    \n
+    <code>eptest -c palette</code>\n
+    Clear the screen to white (<code>-c</code> option) and draw the "palette"
+    test, which shows all the available grey levels and colours.\n
+    \n
+    <code>eptest -c -f palette</code>\n
+    Like the previous example, but with standard GR_BW CFA enabled for colour
+    displays.\n
+    \n
+    <code>eptest -c check 80</code>\n
+    Clear the screen to white and draw a black & white checkerboard with 80x80
+    squares.\n
+    \n
+    <code>eptest -c -f check 120 red</code>\n
+    Like the previous example, but with 120x120 red squares instead (for colour
+    displays).
+    \n
+    Note: Although the <code>-f</code> can be used safely on monochrome
+    displays, it does not make sense in terms of user experience.  The image
+    will look diffused and will not use the full monochrome screen
+    resolution.\n
+    \n
+    <code>eptest -h</code>\n
+    This command shows all the available test patterns and options.\n
+
+  - <code style="font-weight:bold">epview</code>:
+    E-Paper document viewer application\n
+    \n
+    The intent of the <code>epview</code> application is to show various
+    documents such as text, images, videos and formatted text (PDF, ePUB) on
+    EPDs.  Currently only <span style="font-weight:bold">PNG images</span> are
+    supported.  It basically renders the image into the framebuffer using
+    <code>libpldraw</code> and then requests an EPD update with
+    <code>libplepaper</code>.  A few typical commands:\n
+    \n
+    <code>epview my_image.png</code>\n
+    Show the given PNG image "my_image.png"\n
+    \n
+    <code>epview -f -r90 my_portrait_colour_image.png</code>\n
+    Show the given PNG image with CFA enable (for colour display) and rotated
+    by 90 degrees clockwise.\n
+    \n
+    <code>epview -h</code>\n
+    Show the help message with all the available options.\n
+
+  - <code style="font-weight:bold">plottest</code>:
+    Handwriting application\n
+    \n
+    When a touchscreen, stylus sensor or mouse is available, the
+    <code>plottest</code> application can be run to evaluate the handwriting
+    performance.  This uses fast monochrome waveform and does the very minimum
+    data processing by simply drawing straight thin lines between each input
+    point it receives.  A typical command to run it:\n
+    \n
+    <code>plottest -I Touchscreen -g</code>
+    Run the application using an input device with a name matching
+    "Touchscreen" (can be a regular expression) and grab it so other
+    applications do not receive any input events at the same time.\n
+    \n
+
+  \section code_sec Sample code
+
+    The following code snippets show typical examples of how to use the PLSDK
+    libraries.
+
+    \snippet snippets.c sample code
+ */

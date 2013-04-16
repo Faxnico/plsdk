@@ -1,0 +1,27 @@
+include $(BUILDER_HOME)/builder.mk
+
+lib_dirs := \
+	pl-kernel-headers \
+	python-headers \
+	libplepaper \
+	mod_plepaper \
+	libpldraw \
+	libplinput \
+	pyplsdk \
+	external/zlib \
+	external/libpng \
+	external/libjpeg \
+	external/zlibmodule \
+	external/pil
+
+app_dirs := \
+	eptest \
+	epview \
+	plinput \
+	plottest
+
+subdirs := $(lib_dirs) $(app_dirs)
+
+.PHONY: all
+
+all: print-arch sub-make
