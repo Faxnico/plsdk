@@ -17,7 +17,7 @@
   evaluate the Plastic Logic EPD technology, build demonstrators and product
   prototypes.  It may also be used in a commercial product.
 
-  The <span style="font-weight:bold">C API</span> provided by the PLSDK
+  The <span style="font-weight:bold">C API</span> defined by the PLSDK
   libraries provides an abstraction layer as well as convenience functions to
   achieve all basic <span style="font-weight:bold">drawing operations</span>
   and complete <span style="font-weight:bold">manual EPD control</span>.  The
