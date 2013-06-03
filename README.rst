@@ -85,6 +85,20 @@ Building for Android is achieved with the Android Native Development Kit (NDK).
 Instructions to install it can be found on the `Android NDK page
 <http://developer.android.com/tools/sdk/ndk/index.html>`_.
 
+A different repo manifest file ``android-ndk.xml`` needs to be used to build
+with the Android NDK.  If the source tree has not yet been initialised, run::
+
+    repo init -u git@github.com:plasticlogic/manifest.git -b master -m android-ndk.xml
+
+Otherwise, to simply switch to the other manifest file::
+
+    repo init -m android-ndk.xml
+    rm -rf plsdk
+
+Then to actually update the source tree::
+
+    repo sync
+
 Then to build the source code, run::
 
     $ ndk-build -j5
