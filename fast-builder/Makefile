@@ -8,6 +8,7 @@ lib_dirs := \
 	libpldraw \
 	libplinput \
 	pyplsdk \
+	plsdk \
 	external/zlib \
 	external/libpng \
 	external/libjpeg \
