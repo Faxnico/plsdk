@@ -2,6 +2,6 @@
 PLASTICLOGIC_NDK_BUILD := 1
 APP_PLATFORM := android-8
 APP_MODULES := \
-	epview eptest plinput plottest \
+	epview eptest plinput plottest plhwtools \
 	mod_plepaper_imx mod_plepaper_plepdc mod_plepaper_epson \
 	_plsdk _imaging
