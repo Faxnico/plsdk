@@ -2,7 +2,7 @@ include $(BUILDER_HOME)/builder.mk
 
 CFLAGS += -O2
 LDFLAGS += -ldl
-libs := libplepaper.a libpldraw.a libplinput.a
+libs := libplepaper.a libpldraw.a libplinput.a libplhw.a
 out := libplsdk.so
 
 $(LIBDIR)/%.so:
