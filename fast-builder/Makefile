@@ -7,6 +7,7 @@ lib_dirs := \
 	mod_plepaper \
 	libpldraw \
 	libplinput \
+	libplhw \
 	pyplsdk \
 	plsdk \
 	external/zlib \
@@ -19,7 +20,8 @@ app_dirs := \
 	eptest \
 	epview \
 	plinput \
-	plottest
+	plottest \
+	plhwtools
 
 subdirs := $(lib_dirs) $(app_dirs)
 
