@@ -3,6 +3,7 @@ include $(BUILDER_HOME)/builder.mk
 lib_dirs := \
 	pl-kernel-headers \
 	python-headers \
+	external/eglib \
 	libplepaper \
 	mod_plepaper \
 	libpldraw \
