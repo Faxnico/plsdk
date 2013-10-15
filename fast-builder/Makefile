@@ -4,6 +4,7 @@ lib_dirs := \
 	pl-kernel-headers \
 	python-headers \
 	external/eglib \
+	libplutil \
 	libplepaper \
 	mod_plepaper \
 	libpldraw \
