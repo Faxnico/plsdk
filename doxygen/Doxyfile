@@ -587,7 +587,8 @@ INPUT                  = \
     libpldraw/libpldraw.h \
     libplepaper/libplepaper.h \
     libplinput/libplinput.h \
-    libplhw/libplhw.h
+    libplhw/libplhw.h \
+    pldata/lzss/lib/lzss.h
 
 # This tag can be used to specify the character encoding of the source files
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding, which is
