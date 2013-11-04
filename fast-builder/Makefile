@@ -10,8 +10,10 @@ lib_dirs := \
 	libpldraw \
 	libplinput \
 	libplhw \
+	pldata/lzss/lib \
+	plsdk/libplsdk \
 	pyplsdk \
-	plsdk \
+	pldata/lzss/python \
 	external/zlib \
 	external/libpng \
 	external/libjpeg \
@@ -23,7 +25,8 @@ app_dirs := \
 	epview \
 	plinput \
 	plottest \
-	plhwtools
+	plhwtools \
+	pldata/lzss/app
 
 subdirs := $(lib_dirs) $(app_dirs)
 
