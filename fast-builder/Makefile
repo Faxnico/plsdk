@@ -10,6 +10,7 @@ lib_dirs := \
 	libpldraw \
 	libplinput \
 	libplhw \
+	pldata/ \
 	pldata/lzss/lib \
 	plsdk/libplsdk \
 	pyplsdk \
