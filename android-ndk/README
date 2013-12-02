@@ -1,0 +1,55 @@
+Plastic Logic SDK - NDK Builder instructions
+
+1. Prerequesites
+
+In order to build for an Android target you need to download and install
+the Android NDK toolset. This can be downloaded from:
+
+http://developer.android.com/tools/sdk/ndk/index.html
+
+By default it will install in /opt/android-ndk-<version>
+
+2. Adjust environment variables
+
+Once installed the only setup required is to add the NDK installation folder
+to the path.
+
+Modify the envsetup.sh script to append the NDK location to the PATH for
+future use.
+
+There is no default value as the NDK installation location cannot be predicted.
+
+
+3. Build
+
+To build the SDK using the NDK Builder execute the following commands
+from the build_android-ndk directory:
+
+. /jni/envsetup.sh
+ndk-build
+
+The compiled binary files are located in the following directory:
+
+Top-level output directory: libs/$ABI/
+For example: ./libs/armeabi/
+
+4. Installing the SDK on a target system
+
+The SDK files required on a target system are:
+    - All the applications and shared libraries from the “libs/$ABI” directory
+
+The shared libraries must be copied to a standard library directory
+(/lib or /usr/lib), or the applications will not be able find the libraries
+automatically.
+
+
+To test the SDK is installed correctly, navigate to the directory where the
+applications have been copied and type:
+# ./eptest
+If the SDK is installed correctly then this will update the display.  If not,
+check that the output of the eptest application reports the correct e-paper
+mode and description.  If the mode is reported as “noep” then the application
+has not found the correct library for the target platform.  Check that the
+shared libraries have been copied to the target platform and are
+in a standard library directory.
+
