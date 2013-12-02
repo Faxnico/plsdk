@@ -1,0 +1,80 @@
+Plastic Logic SDK - Fast Builder instructions
+
+1. Prerequesites
+
+In order to build for an ARM GNU/Linux target, a third-party cross-compiler
+toolchain needs to be installed.  Nothing special needs to be installed for
+native builds apart from the GCC toolchain and GNU Make.
+
+
+2. Adjust environment variables
+
+The envsetup.sh has a default set of environment variables.  The CROSS_COMPILE
+variable needs to be adjusted to your installed toolchain for
+cross-compilation.  When building for the native host target, the
+native-envsetup.sh script can be used instead.  It can also be sourced after
+envsetup.sh as it will unset the cross-compiler environment variables.
+
+The Fast Builder needs two extra environment variables:
+BUILDER_HOME: path to the directory where the Fast Builder files are installed
+TOP_DIR: path to the top of the current source tree to be built
+
+The default values are appropriate when using the setup.sh script to deploy the
+source tree.
+
+
+3. Build
+
+Typical commands to build the SDK with the Fast Builder are:
+. envsetup.sh
+make
+
+For parallel build, for example to use 4 processes in parallel, run:
+make -j5
+
+The compiled binary files and installed header files are located in the
+following directories:
+
+Top-level output directory: $TOP_DIR/out/$ARCH
+For example: ./out/arm
+
+include: all the installed header files, typically from libraries
+lib: all the libraries, static and shared
+bin: all the applications executables
+pythonX.Y: all the Python modules for Python version X.Y
+
+
+4. Installing the PLSDK on a target system
+
+The SDK files required on a target system are:
+* all the applications from the "out/$ARCH/bin" directory
+* the shared library files (.so) files from the "out/$ARCH/lib" directory
+* the Python modules from the "out/$ARCH/PythonX.Y" directory
+
+If the shared libraries are copied to a standard library directory (/lib or
+/usr/lib), then the applications will be able find the libraries automatically.
+If however the shared libraries are not copied to a standard library directory
+then the LD_LIBRARY_PATH environment variable must include the directory where
+the shared libraries have been copied.
+
+For example if the shared libraries are copied to “/example/lib” then the
+LD_LIBRARY_PATH can be set as follows:
+export LD_LIBRARY_PATH=/example/lib
+
+To test the SDK is installed correctly, navigate to the directory where the
+applications have been copied and type:
+./eptest
+
+If the SDK is installed correctly then this will update the display with a test
+pattern.  If not, check that the output of the eptest application reports the
+correct e-paper mode and description.  If the mode is reported as “noep” then
+the application has not found the correct library for the target platform.
+Check that the shared libraries have been copied to the target platform and
+they are either in a standard library directory or LD_LIBRARY_PATH is set
+correctly.
+
+The Python C extensions (.so files) need to be copied to:
+/usr/lib/pythonX.Y/lib-dynload/
+
+The Python scripts (.py and .pyc files) need to be copied to:
+/usr/lib/pythonX.Y/
