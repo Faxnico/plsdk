@@ -1,7 +1,7 @@
-pl-kernel-headers 1.6
+pl-kernel-headers 007
 libplutil 1.2
 libplepaper 1.9
-mod_plepaper 014
+mod_plepaper 015
 libpldraw 1.9
 libplinput 1.5
 libplhw 1.3
@@ -9,10 +9,10 @@ eptest 2.5
 epview 1.10
 plinput 1.3
 plottest 1.2
-plhwtools 1.3
+plhwtools 1.4
 python-headers 001
 pyplsdk 1.6
-pldata 005
+pldata 006
 eglib 1.0 all external
 pil 1.1.7-pl-006 all external
 zlib android-2.3.7_r1-pl-001 fast-builder external
