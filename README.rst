@@ -35,7 +35,7 @@ page <http://source.android.com/source/downloading.html>`_.  In a nutshell::
 
     $ mkdir ~/bin
     $ PATH=~/bin:$PATH
-    $ curl https://dl-ssl.google.com/dl/googlesource/git-repo/repo > ~/bin/repo
+    $ curl http://commondatastorage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
     $ chmod a+x ~/bin/repo
 
 Then to get the latest source code from `Github
