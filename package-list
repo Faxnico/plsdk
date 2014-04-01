@@ -2,12 +2,12 @@ pl-kernel-headers 007
 libplutil 1.2
 libplepaper 1.9
 mod_plepaper 015
-libpldraw 1.9
-libplinput 1.6
+libpldraw 1.10
+libplinput 1.7
 libplhw 1.3
 eptest 2.7
 epview 1.10
-plinput 1.3
+plinput 1.4
 plottest 1.2
 plhwtools 1.4
 python-headers 001
